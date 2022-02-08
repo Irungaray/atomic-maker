@@ -1,44 +1,37 @@
-const fs = require("fs")
-// const cleanup = require("./cleanup")()
+const readline = require("readline")
 
-const component = "Item"
+const { mkFolder, mkJsx, mkCss, mkJs } = require("./filesystem")
 
-const jsxStr = `const ${component} = () => {\n    return (\n        <></>\n    )\n}\n\nexport { ${component} }\n`
-const cssStr = `.root {}`
-const indexStr = `export { ${component} } from './${component}.jsx'`
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+})
 
-fs.mkdirSync(`./${component}`,
-    { recursive: true },
+let name
+let path
 
-    (err) => {
-        if (err) throw err
-    },
-    console.log("Folder created")
-)
+rl.question(`What's the component name? `, (component) => {
+    rl.question("Is it an atom (1), a molecule (2) or an organism (3)? ", (type) => {
+        let normalize = component.toLowerCase().charAt(0).toUpperCase() + component.toLowerCase().slice(1)
+        name = normalize
 
-fs.writeFileSync(`./${component}/${component}.jsx`,
-    jsxStr,
+        if (type == 1 || type == "atom") path = "atoms"
+        if (type == 2 || type == "molecule") path = "molecules"
+        if (type == 3 || type == "organism") path = "organisms"
 
-    (err) => {
-        if (err) throw err
-    },
-    console.log("Jsx created")
-)
+        rl.close()
+    })
+})
 
-fs.writeFileSync(`./${component}/${component}.css`,
-    cssStr,
 
-    (err) => {
-        if (err) throw err
-    },
-    console.log("Css created")
-)
+rl.on("close", () => {
+    console.log(`Creating component ${name}  in /src/components/${path}/${name}`)
 
-fs.writeFileSync(`./${component}/index.js`,
-    indexStr,
+    mkFolder(path, name)
+    mkJsx(path, name)
+    mkCss(path, name)
+    mkJs(path, name)
 
-    (err) => {
-        if (err) throw err
-    },
-    console.log("Index created")
-)
+    console.log("Thank you for using atomic maker!")
+    process.exit(0)
+})
