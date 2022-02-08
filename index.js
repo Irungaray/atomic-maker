@@ -1,0 +1,1 @@
+const script = require("./readline");

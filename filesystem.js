@@ -1,8 +1,10 @@
 const fs = require("fs")
 // const cleanup = require("./cleanup")()
 
+const dir = "./src/components"
+
 const mkFolder = (path, name) => {
-    fs.mkdirSync(`./src/components/${path}/${name}`,
+    fs.mkdirSync(`${dir}/${path}/${name}`,
         { recursive: true },
 
         err => { if (err) throw err },
@@ -14,7 +16,7 @@ const mkFolder = (path, name) => {
 const mkJsx = (path, name) => {
     let str = `import './${name}.css'\n\nconst ${name} = () => {\n    return (\n        <></>\n    )\n}\n\nexport { ${name} }\n`
 
-    fs.writeFileSync(`./src/components/${path}/${name}/${name}.jsx`,
+    fs.writeFileSync(`${dir}/${path}/${name}/${name}.jsx`,
         str,
 
         err => { if (err) throw err },
@@ -26,7 +28,7 @@ const mkJsx = (path, name) => {
 const mkCss = (path, name) => {
     let str = `.root {\n\n}`
 
-    fs.writeFileSync(`./src/components/${path}/${name}/${name}.css`,
+    fs.writeFileSync(`${dir}/${path}/${name}/${name}.css`,
         str,
 
         err => { if (err) throw err },
@@ -38,7 +40,7 @@ const mkCss = (path, name) => {
 const mkJs = (path, name) => {
     const indexStr = `export { ${name} } from './${name}.jsx'`
 
-    fs.writeFileSync(`./src/components/${path}/${name}/${name}.js`,
+    fs.writeFileSync(`${dir}/${path}/${name}/${name}.js`,
         indexStr,
 
         err => { if (err) throw err },
