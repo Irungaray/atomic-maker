@@ -14,6 +14,7 @@ let errors = {
 }
 
 const make = (type, name) => {
+    // Here you can modify the boilerplate and dir to make it suit your needs.
     let strings = {
         jsxStr: `import './${name}.css'\n\nconst ${name} = () => {\n    return (\n        <></>\n    )\n}\n\nexport { ${name} }\n`,
         cssStr: `.root {\n\n}`,
@@ -49,7 +50,7 @@ const make = (type, name) => {
         err => { if (err) throw err },
     )
 
-    console.log("Thank you for using atomic maker!")
+    console.log("Thank you for using Atomic Maker!")
 
     process.exit(0)
 }
