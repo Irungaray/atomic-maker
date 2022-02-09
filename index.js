@@ -13,7 +13,7 @@ let errors = {
     invalidOption: "Valid options are: atom (1), molecule (2) or organism (3)"
 }
 
-const mkAll = (type, name) => {
+const make = (type, name) => {
     let strings = {
         jsxStr: `import './${name}.css'\n\nconst ${name} = () => {\n    return (\n        <></>\n    )\n}\n\nexport { ${name} }\n`,
         cssStr: `.root {\n\n}`,
@@ -88,7 +88,7 @@ if (argsv.length > 2) {
 
     name = capitalize(component)
 
-    mkAll(type, name)
+    make(type, name)
 } else {
     const rl = readline.createInterface({
         input: process.stdin,
@@ -115,6 +115,6 @@ if (argsv.length > 2) {
 
 
     rl.on("close", () => {
-        mkAll(type, name)
+        make(type, name)
     })
 }
