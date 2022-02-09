@@ -25,38 +25,29 @@ const make = (type, name) => {
 
     console.log(`Creating component ${name} in ${dir}`)
 
-    fs.mkdirSync(`${dir}`,
+    fs.mkdirSync(
+        `${dir}`,
         { recursive: true },
-
         err => { if (err) throw err },
-
-        console.log("Folder created")
     )
 
-    fs.writeFileSync(`${filename}.jsx`,
+    fs.writeFileSync(
+        `${filename}.jsx`,
         strings.jsxStr,
-
         err => { if (err) throw err },
-
-        console.log("Jsx created")
     )
 
-    fs.writeFileSync(`${filename}.css`,
+    fs.writeFileSync(
+        `${filename}.css`,
         strings.cssStr,
-
         err => { if (err) throw err },
-
-        console.log("Css created")
     )
 
-    fs.writeFileSync(`${dir}/index.js`,
+    fs.writeFileSync(
+        `${dir}/index.js`,
         strings.indexStr,
-
         err => { if (err) throw err },
-
-        console.log("Index created")
     )
-
 
     console.log("Thank you for using atomic maker!")
 
@@ -79,9 +70,9 @@ if (argsv.length > 2) {
     let component = argsv[3]
     let isFlag
 
-    if (flag == "-a") isFlag = true, type = "atoms";
-    if (flag == "-m") isFlag = true, type = "molecules";
-    if (flag == "-o") isFlag = true, type = "organisms";
+    if (flag == "-a") isFlag = true, type = "atoms"
+    if (flag == "-m") isFlag = true, type = "molecules"
+    if (flag == "-o") isFlag = true, type = "organisms"
 
     if (!isFlag) throwErr(errors.noFlag)
     if (component == undefined || component.length < 3) throwErr(errors.noNameAfterFlag)
@@ -112,7 +103,6 @@ if (argsv.length > 2) {
             rl.close()
         })
     })
-
 
     rl.on("close", () => {
         make(type, name)
