@@ -8,6 +8,13 @@ const dir = "./src/components"
 let name
 let path
 
+let errors = {
+    noFlag: "Flags must be inserted with a ' - ' symbol. \nAvailable flags are: -a, -m and -o for atoms, molecules and organisms respectively.",
+    noNameAfterFlag: "Component's name must be passed after the flag, and be at least 3 characters long.",
+    noNameOnQuestion: "Component's name must be provided, and be at least 3 characters long.",
+    invalidOption: "Valid options are: atom (1), molecule (2) or organism (3)"
+}
+
 const mkFolder = (path, name) => {
     fs.mkdirSync(`${dir}/${path}/${name}`,
         { recursive: true },
@@ -71,8 +78,8 @@ const capitalize = (input) => {
     return input.toLowerCase().charAt(0).toUpperCase() + input.toLowerCase().slice(1)
 }
 
-const throwErr = (output) => {
-    console.error(output)
+const throwErr = (err) => {
+    console.error(err)
     process.exit(1)
 }
 
@@ -87,9 +94,8 @@ if (argsv.length > 2) {
     if (flag == "-m") isFlag = true, path = "molecules";
     if (flag == "-o") isFlag = true, path = "organisms";
 
-    if (!isFlag) throwErr("Flags must be inserted with a ' - ' symbol. \nAvailable flags are: -a, -m and -o for atoms, molecules and organisms respectively.")
-
-    if (component == undefined || component.length < 3) throwErr("Component's name must be passed after the flag, and be at least 3 characters long.")
+    if (!isFlag) throwErr(errors.noFlag)
+    if (component == undefined || component.length < 3) throwErr(errors.noNameAfterFlag)
 
     name = capitalize(component)
 
@@ -101,7 +107,7 @@ if (argsv.length > 2) {
     })
 
     rl.question(`What's the component name? `, (component) => {
-        if (component == undefined || component.length < 3) throwErr("Component's name must be provided, and be at least 3 characters long.")
+        if (component == undefined || component.length < 3) throwErr(errors.noNameOnQuestion)
 
         rl.question("Is it an atom (1), a molecule (2) or an organism (3)? ", (type) => {
             let isType
@@ -110,7 +116,7 @@ if (argsv.length > 2) {
             if (type == 2 || type == "molecule") isType = true, path = "molecules"
             if (type == 3 || type == "organism") isType = true, path = "organisms"
 
-            if (!isType) throwErr("Valid options are: atom (1), molecule (2) or organism (3)")
+            if (!isType) throwErr(errors.invalidOption)
 
             name = capitalize(component)
 
