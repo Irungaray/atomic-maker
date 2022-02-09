@@ -1,12 +1,10 @@
-// "Minified" code. For a more modularized and human-readable version, checkout the development branch.
 const readline = require("readline")
 const fs = require("fs")
 
 const argsv = process.argv
 
-const dir = "./src/components"
 let name
-let path
+let type
 
 let errors = {
     noFlag: "Flags must be inserted with a ' - ' symbol. \nAvailable flags are: -a, -m and -o for atoms, molecules and organisms respectively.",
@@ -15,59 +13,50 @@ let errors = {
     invalidOption: "Valid options are: atom (1), molecule (2) or organism (3)"
 }
 
-const mkFolder = (path, name) => {
-    fs.mkdirSync(`${dir}/${path}/${name}`,
+const mkAll = (type, name) => {
+    let strings = {
+        jsxStr: `import './${name}.css'\n\nconst ${name} = () => {\n    return (\n        <></>\n    )\n}\n\nexport { ${name} }\n`,
+        cssStr: `.root {\n\n}`,
+        indexStr: `export { ${name} } from './${name}.jsx'`
+    }
+
+    let dir = `./src/components/${type}/${name}`
+    let filename = `${dir}/${name}`
+
+    console.log(`Creating component ${name} in ${dir}`)
+
+    fs.mkdirSync(`${dir}`,
         { recursive: true },
 
         err => { if (err) throw err },
 
         console.log("Folder created")
     )
-}
 
-const mkJsx = (path, name) => {
-    let str = `import './${name}.css'\n\nconst ${name} = () => {\n    return (\n        <></>\n    )\n}\n\nexport { ${name} }\n`
-
-    fs.writeFileSync(`${dir}/${path}/${name}/${name}.jsx`,
-        str,
+    fs.writeFileSync(`${filename}.jsx`,
+        strings.jsxStr,
 
         err => { if (err) throw err },
 
         console.log("Jsx created")
     )
-}
 
-const mkCss = (path, name) => {
-    let str = `.root {\n\n}`
-
-    fs.writeFileSync(`${dir}/${path}/${name}/${name}.css`,
-        str,
+    fs.writeFileSync(`${filename}.css`,
+        strings.cssStr,
 
         err => { if (err) throw err },
 
         console.log("Css created")
     )
-}
 
-const mkJs = (path, name) => {
-    const indexStr = `export { ${name} } from './${name}.jsx'`
-
-    fs.writeFileSync(`${dir}/${path}/${name}/index.js`,
-        indexStr,
+    fs.writeFileSync(`${dir}/index.js`,
+        strings.indexStr,
 
         err => { if (err) throw err },
 
         console.log("Index created")
     )
-}
 
-const mkAll = (path, name) => {
-    console.log(`Creating component ${name} in ${dir}/${path}/${name}`)
-
-    mkFolder(path, name)
-    mkJsx(path, name)
-    mkCss(path, name)
-    mkJs(path, name)
 
     console.log("Thank you for using atomic maker!")
 
@@ -90,31 +79,31 @@ if (argsv.length > 2) {
     let component = argsv[3]
     let isFlag
 
-    if (flag == "-a") isFlag = true, path = "atoms";
-    if (flag == "-m") isFlag = true, path = "molecules";
-    if (flag == "-o") isFlag = true, path = "organisms";
+    if (flag == "-a") isFlag = true, type = "atoms";
+    if (flag == "-m") isFlag = true, type = "molecules";
+    if (flag == "-o") isFlag = true, type = "organisms";
 
     if (!isFlag) throwErr(errors.noFlag)
     if (component == undefined || component.length < 3) throwErr(errors.noNameAfterFlag)
 
     name = capitalize(component)
 
-    mkAll(path, name)
+    mkAll(type, name)
 } else {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
     })
 
-    rl.question(`What's the component name? `, (component) => {
-        if (component == undefined || component.length < 3) throwErr(errors.noNameOnQuestion)
+    rl.question(`What's the component name? `, (nameInput) => {
+        if (nameInput == undefined || nameInput.length < 3) throwErr(errors.noNameOnQuestion)
 
-        rl.question("Is it an atom (1), a molecule (2) or an organism (3)? ", (type) => {
+        rl.question("Is it an atom (1), a molecule (2) or an organism (3)? ", (typeInput) => {
             let isType
 
-            if (type == 1 || type == "atom") isType = true, path = "atoms"
-            if (type == 2 || type == "molecule") isType = true, path = "molecules"
-            if (type == 3 || type == "organism") isType = true, path = "organisms"
+            if (typeInput == 1 || typeInput == "atom") isType = true, type = "atoms"
+            if (typeInput == 2 || typeInput == "molecule") isType = true, type = "molecules"
+            if (typeInput == 3 || typeInput == "organism") isType = true, type = "organisms"
 
             if (!isType) throwErr(errors.invalidOption)
 
@@ -126,6 +115,6 @@ if (argsv.length > 2) {
 
 
     rl.on("close", () => {
-        mkAll(path, name)
+        mkAll(type, name)
     })
 }
