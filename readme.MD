@@ -2,4 +2,8 @@
 
 **CLI to generate atomic design scaffolding & boilerplate.**
 
-*More info coming soon...*
+Cooming soon:
+* *shell script* for Linux Users
+* *npm package* for Windows users
+
+*and more info...*
