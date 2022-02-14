@@ -54,7 +54,7 @@ const make = (type, name) => {
     )
 
     files.forEach(file => {
-        fs.writeFile(
+        fs.writeFileSync(
             file.filename,
             file.content,
             err => { if (err) throw err }
