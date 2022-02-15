@@ -18,12 +18,10 @@ For my React-based projects, I really like the folder architecture that _**Atomi
 
 ## **Available on two main releases:**
 
-### Source Code:
+#### Source Code:
 - Designed primarily for GNU/Linux users. Installable via Shell script.
 
-- Also, you can manually clone the `index.js` wherever you want, rename it and create and alias on your terminal's .rc file. This option is recommendend for advanced users.
-
-<br />
+- Also, you can manually clone the `index.js` wherever you want, rename it and create and alias on your terminal's .rc file. This option is recommendend for advanced users &&|| [linux boomers](https://i.redd.it/l92dpfbcbx351.png).
 
 #### npm Package:
 - Designed primarily for Windows users, or for those who want to use it on a project-level basis. Or for [_soydevs_](https://www.urbandictionary.com/define.php?term=Soydev).
@@ -37,7 +35,7 @@ For my React-based projects, I really like the folder architecture that _**Atomi
     - Afterwards, run `atomic-maker` or create a script for it.
 
 
-You will be prompted to name and select the type of component you want. Pretty straight-forward process.
+You will be prompted to name and select the type of component you want. Pretty straight-forward process. For more info, refer to branch _npm-pkg_
 
 <br />
 
@@ -61,7 +59,7 @@ Once there, execute the alias anywhere on your terminal to generate the folder s
 <br />
 
 ### **Flags:**
-Let's say we have an alias, `alias atomic-maker="node ~/bin/atomic-maker.js"`
+Let's say we have an alias, `alias atomic-maker="node ~/bin/atomic-maker.js"`.
 Then, we can run:
 ```
 atomic-maker -a Component // Creates an atom named Component
@@ -69,7 +67,7 @@ atomic-maker -m Component // Creates a molecule named Component
 atomic-maker -o Component // Creates an organism named Component
 ```
 
-Keep in mind this methos is _**not**_ available if you install it as an npm package.
+Keep in mind this method is _**not**_ available if you install it as an npm package.
 
 # Forks & Modification
 
