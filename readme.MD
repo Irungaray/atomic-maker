@@ -37,7 +37,7 @@ For my React-based projects, I really like the folder architecture that _**Atomi
 
 
 
-You will be prompted to name and select the type of component you want. Pretty straight-forward process. For more info, refer to branch _npm-pkg_
+You will be prompted to name and select the type of component you want. Pretty straight-forward process. For more info, refer to branch _npm-pkg_.
 
 <br />
 
@@ -95,6 +95,14 @@ To:
 ```
 
 `\n` is for break lines.
+
+_**Caveats:**_
+    
+   - By default, the boilerplate doesn't contain semicolons. You can modify the source code or let your linter/formatter add them for you.
+   - By default, React is not imported. It is no longer required on `.jsx` files since React 17.
+   - By default, CSS is created with `.root { }` inside.
+   - Almost all error cases are handled. If you encounter an unexpected behaviour, please create an issue.
+   - As stated before, the use of flags is not supported on the npm package due to the complexity of handling argvs on npm scripts.
 
 ## **Cooming soon:**
 - [x] *npm package* for Windows users
