@@ -33,6 +33,8 @@ For my React-based projects, I really like the folder architecture that _**Atomi
 - #### **From npm Package:**
     - Run `npm i -D atomic-maker` on your project.
     - Afterwards, run `atomic-maker` or create a script for it.
+    - OR simply run `npx atomic-maker`
+
 
 
 You will be prompted to name and select the type of component you want. Pretty straight-forward process. For more info, refer to branch _npm-pkg_
