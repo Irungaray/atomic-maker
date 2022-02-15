@@ -1,9 +1,77 @@
-# Atomic Maker
+<div align="center">
 
-**CLI to generate atomic design scaffolding & boilerplate.**
+# **Atomic Maker**
 
-Cooming soon:
-* *shell script* for Linux Users
-* *npm package* for Windows users
+### **CLI to generate atomic design scaffolding & boilerplate.**
 
-*and more info...*
+</div>
+
+<br />
+
+![Atomic Design Scaffolding](https://i.postimg.cc/8GyWV55G/Screenshot-from-2022-02-14-23-12-44.png)
+
+<div style="text-align: right">
+    Automatically generate Atomic Design Scaffolding.
+</div>
+
+<br />
+
+For my React-based projects, I really like the folder architecture that _**Atomic Design**_ proposes. But since it's a real a pain in the ass making file after file in folder inside folder, I developed this simple CLI to do it for me.
+
+<br />
+
+## **Available on two main releases:**
+
+>### Source Code:
+- Designed primarily for GNU/Linux users. Installable via Shell script.
+
+- Also, you can manually clone the `index.js` wherever you want, rename it and create and alias on your terminal's .rc file. This option is recommendend for advanced users.
+
+<br />
+
+>### npm Package:
+- Designed primarily for Windows users, or for those who want to use it on a project-level basis. Or for [_soydevs_](https://www.urbandictionary.com/define.php?term=Soydev).
+
+<br />
+
+# Installation & Usage
+
+- ### **From npm Package:**
+    - Run `npm i -D atomic-maker` on your project.
+    - Afterwards, run `atomic-maker` or create a script for it.
+
+
+You will be prompted to name and select the type of component you want. Pretty straight-forward process.
+
+<br />
+
+- ### **From Source Code:**
+    - Clone the repo
+    - Execute the `.js` file with Node (or create an alias)
+
+You can insert a flag corresponding to the type of component you want (refer to _**flags**_) and, afterwards, name it. This way, you can generate the component with a one-line command. _This method is **not** available on the npm package._
+
+<br />
+
+- ### **From shell script:**
+    - Run:
+
+        ```curl -o- https://raw.githubusercontent.com/Irungaray/atomic-maker/main/script.sh | bash```
+
+It `CURLs` the raw `Js` to a `~/bin` folder, then creates the alias `atomize` on your `.zshrc`.
+
+Once there, execute the alias anywhere on your terminal to generate the folder structure and files. _Flags are available in this version. I'm still testing the install script, so this method is currently **not** recommended._
+
+<br />
+
+# Forks & Modification
+
+This software is under GPLv3 license, so, modifications, pull requests and forks are encouraged and appreciated. Unless you are a [_FAGMAN_](https://www.reddit.com/r/wallstreetbets/comments/8pvu4d/now_that_microsoft_is_big_again_faang_is_now/).
+
+You can easily modify the path and boilerplate code the component is created with on lines 28-45.
+
+## **Cooming soon:**
+- [x] *npm package* for Windows users
+- [ ] *shell script* for Linux Users (on development)
+- [ ] **Code of Conduct**
+
