@@ -77,6 +77,25 @@ This software is under GPLv3 license, so, modifications, pull requests and forks
 
 You can easily modify the path and boilerplate code the component is created with on lines 28-45.
 
+_**Exempli gratia,**_ if you want your `.jsx` to be created with PropTypes import and declaration, you can modify the object which contains the `.jsx` string from:
+
+```
+{
+    filename: `${basename}.jsx`,
+    content: `import './${name}.css'\n\nconst ${name} = () => {\n    return (\n        <></>\n    )\n}\n\nexport { ${name} }\n`,
+}
+```
+To:
+
+```
+{
+    filename: `${basename}.jsx`,
+    content: `import PropTypes from 'prop-types'\n\n\import './${name}.css'\n\nconst ${name} = () => {\n    return (\n        <></>\n    )\n}\n\n${name}.PropTypes = {\n\n\}\n\nexport { ${name} }\n`,
+},
+```
+
+`\n` is for break lines.
+
 ## **Cooming soon:**
 - [x] *npm package* for Windows users
 - [ ] *shell script* for Linux Users (on development)
