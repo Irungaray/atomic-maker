@@ -10,10 +10,6 @@
 
 ![Atomic Design Scaffolding](https://i.postimg.cc/8GyWV55G/Screenshot-from-2022-02-14-23-12-44.png)
 
-<div style="text-align: right">
-    Automatically generate Atomic Design Scaffolding.
-</div>
-
 <br />
 
 For my React-based projects, I really like the folder architecture that _**Atomic Design**_ proposes. But since it's a real a pain in the ass making file after file in folder inside folder, I developed this simple CLI to do it for me.
@@ -22,21 +18,21 @@ For my React-based projects, I really like the folder architecture that _**Atomi
 
 ## **Available on two main releases:**
 
->### Source Code:
+### Source Code:
 - Designed primarily for GNU/Linux users. Installable via Shell script.
 
 - Also, you can manually clone the `index.js` wherever you want, rename it and create and alias on your terminal's .rc file. This option is recommendend for advanced users.
 
 <br />
 
->### npm Package:
+#### npm Package:
 - Designed primarily for Windows users, or for those who want to use it on a project-level basis. Or for [_soydevs_](https://www.urbandictionary.com/define.php?term=Soydev).
 
 <br />
 
 # Installation & Usage
 
-- ### **From npm Package:**
+- #### **From npm Package:**
     - Run `npm i -D atomic-maker` on your project.
     - Afterwards, run `atomic-maker` or create a script for it.
 
@@ -63,6 +59,17 @@ It `CURLs` the raw `Js` to a `~/bin` folder, then creates the alias `atomize` on
 Once there, execute the alias anywhere on your terminal to generate the folder structure and files. _Flags are available in this version. I'm still testing the install script, so this method is currently **not** recommended._
 
 <br />
+
+### **Flags:**
+Let's say we have an alias, `alias atomic-maker="node ~/bin/atomic-maker.js"`
+Then, we can run:
+```
+atomic-maker -a Component // Creates an atom named Component
+atomic-maker -m Component // Creates a molecule named Component
+atomic-maker -o Component // Creates an organism named Component
+```
+
+Keep in mind this methos is _**not**_ available if you install it as an npm package.
 
 # Forks & Modification
 
