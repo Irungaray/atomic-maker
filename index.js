@@ -1,15 +1,12 @@
+#!/usr/bin/env node
 const readline = require("readline")
 const fs = require("fs")
-
-const argsv = process.argv
 
 let name
 let type
 
 let errs = {
     exists: "Component already exists. Aborted.",
-    noFlag: "Flags must be inserted with a ' - ' symbol. \nAvailable flags are: -a, -m and -o for atoms, molecules and organisms respectively.",
-    noNameAfterFlag: "Component's name must be passed after the flag, and be at least 3 characters long.",
     noNameOnQuestion: "Component's name must be provided, and be at least 3 characters long.",
     invalidOption: "Valid options are: atom (1), molecule (2) or organism (3)",
     noInput: "\nNo input was provided. Aborted."
@@ -66,49 +63,30 @@ const make = (type, name) => {
     process.exit(0)
 }
 
-// If there are arguments, it executes inmediately with the argsv data
-// Otherwise, it executes as a CLI.
-if (argsv.length > 2) {
-    let flag = argsv[2]
-    let component = argsv[3]
-    let isFlag = false
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
 
-    if (flag == "-a") isFlag = true, type = "atoms"
-    if (flag == "-m") isFlag = true, type = "molecules"
-    if (flag == "-o") isFlag = true, type = "organisms"
+rl.question(`What's the component name? `, (component) => {
+    if (component == undefined || component.length < 3) throwErr(errs.noNameOnQuestion)
 
-    if (!isFlag) throwErr(errs.noFlag)
-    if (component == undefined || component.length < 3) throwErr(errs.noNameAfterFlag)
+    rl.question("Is it an atom (1), a molecule (2) or an organism (3)? ", (isIt) => {
+        let isType = false
 
-    name = capitalize(component)
+        if (isIt == 1 || isIt == "atom" || isIt == "a") isType = true, type = "atoms"
+        if (isIt == 2 || isIt == "molecule" || isIt == "m") isType = true, type = "molecules"
+        if (isIt == 3 || isIt == "organism" || isIt == "o") isType = true, type = "organisms"
 
-    make(type, name)
-} else {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
+        if (!isType) throwErr(errs.invalidOption)
+
+        name = capitalize(component)
+
+        rl.close()
     })
+})
 
-    rl.question(`What's the component name? `, (component) => {
-        if (component == undefined || component.length < 3) throwErr(errs.noNameOnQuestion)
-
-        rl.question("Is it an atom (1), a molecule (2) or an organism (3)? ", (isIt) => {
-            let isType = false
-
-            if (isIt == 1 || isIt == "atom") isType = true, type = "atoms"
-            if (isIt == 2 || isIt == "molecule") isType = true, type = "molecules"
-            if (isIt == 3 || isIt == "organism") isType = true, type = "organisms"
-
-            if (!isType) throwErr(errs.invalidOption)
-
-            name = capitalize(component)
-
-            rl.close()
-        })
-    })
-
-    rl.on("close", () => {
-        if (type && name) make(type, name)
-        else throwErr(errs.noInput)
-    })
-}
+rl.on("close", () => {
+    if (type && name) make(type, name)
+    else throwErr(errs.noInput)
+})
