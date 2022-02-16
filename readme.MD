@@ -109,3 +109,7 @@ _**Caveats:**_
 - [ ] *shell script* for Linux Users (on development)
 - [ ] **Code of Conduct**
 
+<br />
+
+> _**"Telling a programmer there's already a library to do X is like telling a songwriter there's already a song about love." <br />
+    - Pete Cordell**_
