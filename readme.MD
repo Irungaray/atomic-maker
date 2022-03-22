@@ -101,6 +101,7 @@ _**Caveats:**_
    - By default, the boilerplate doesn't contain semicolons. You can modify the source code or let your linter/formatter add them for you.
    - By default, React is not imported. It is no longer required on `.jsx` files since React 17.
    - By default, CSS is created with `.root { }` inside.
+   - The `normalize()` function doesn't respect camelCase.
    - Almost all error cases are handled. If you encounter an unexpected behaviour, please create an issue.
    - As stated before, the use of flags is not supported on the npm package due to the complexity of handling argvs on npm scripts.
 
